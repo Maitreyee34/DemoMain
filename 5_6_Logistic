@@ -1,0 +1,43 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+# Read the house data into a data frame
+df = pd.read_csv('C:\\Users\\USER\\MLDLPractical\\Heart.csv')
+df
+
+df=df.drop(columns = 'Unnamed: 0')
+df
+
+df['ChestPain']=df['ChestPain'].astype('category')
+df['ChestPain']=df['ChestPain'].cat.codes
+df
+
+df['Thal']=df['Thal'].astype('category')
+df['Thal']=df['Thal'].cat.codes
+
+df['AHD']=df['AHD'].astype('category')
+df['AHD']=df['AHD'].cat.codes
+df
+
+df.isnull().sum()
+df
+
+x=df.drop(columns = 'AHD')
+x
+y=df['AHD']
+
+#Split the data into train and test data
+x_train, x_test, y_train, y_test=train_test_split(x,y, test_size=0.3, random_state =21)
+x_train
+
+x_test
+
+from sklearn.preprocessing import StandardScaler
+scaler=StandardScaler()
+x_train_scaled=scaler.fit_transform(x_train)
+x_test_scaled=scaler.transform(x_test)
+x_train_scaled]
+
+from sklearn.linear_model import LogisticRegression
+log_reg=LogisticRegression(random_state=0).fit(x_train_scaled,y_train)
+
+log_reg
